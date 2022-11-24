@@ -70,7 +70,7 @@ resource "aws_ec2_transit_gateway_route_table_association" "app_test" {
 }
 
 resource "aws_ec2_transit_gateway_route" "app_test" {
-  destination_cidr_block         = local.vpc_cidr_destination
+  destination_cidr_block         = local.vpc_cidr_intermediary
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.intermediary_test.id
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app_test.id
 }

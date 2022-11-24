@@ -223,18 +223,18 @@ resource "aws_ec2_transit_gateway_route" "app" {
 #  blackhole                      = true
 #  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app.id
 #}
-
-resource "aws_ec2_transit_gateway_route" "blackhole_2" {
-  destination_cidr_block         = local.vpc_cidr_blackhole_2
-  blackhole                      = true
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app.id
-}
-
-resource "aws_ec2_transit_gateway_route" "blackhole_3" {
-  destination_cidr_block         = local.vpc_cidr_blackhole_3
-  blackhole                      = true
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app.id
-}
+#
+#resource "aws_ec2_transit_gateway_route" "blackhole_2" {
+#  destination_cidr_block         = local.vpc_cidr_blackhole_2
+#  blackhole                      = true
+#  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app.id
+#}
+#
+#resource "aws_ec2_transit_gateway_route" "blackhole_3" {
+#  destination_cidr_block         = local.vpc_cidr_blackhole_3
+#  blackhole                      = true
+#  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.app.id
+#}
 
 # ------------------------ Routes and Route Tables --------------------------
 
@@ -286,6 +286,10 @@ resource "aws_route_table" "intermediary_egress" {
   route {
     cidr_block = local.vpc_cidr_source
     transit_gateway_id = aws_ec2_transit_gateway.tgw.id
+  }
+  route {
+    cidr_block = local.vpc_cidr_destination
+    transit_gateway_id = aws_ec2_transit_gateway.tgw_test.id
   }
 
   tags = {
